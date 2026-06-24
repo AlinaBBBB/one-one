@@ -1,0 +1,1682 @@
+/* ==================== */
+/* ОСНОВНЫЕ ПЕРЕМЕННЫЕ */
+/* ==================== */
+:root {
+    --oneone-black: #111111;
+    --oneone-white: #FFFFFF;
+    --oneone-gray-light: #F8F8F8;
+    --oneone-gray-border: #EAEAEA;
+    --oneone-gray-medium: #999999;
+    --oneone-accent-dark: #1A1A1A;
+    --oneone-accent-pop: #D4AF37;
+    --oneone-accent-sale: #C41E3A;
+    --oneone-accent-popular: #2C2C2C;
+    --oneone-accent: #D282A9;
+}
+
+/* ==================== */
+/* ОБЩИЕ СТИЛИ СТРАНИЦЫ */
+/* ==================== */
+
+/* Фоны */
+.bg-light-subtle {
+    background-color: var(--oneone-gray-light) !important;
+}
+
+.bg-light-gray {
+    background-color: #f9f9f9 !important;
+}
+
+.bg-email-section {
+    background: linear-gradient(to bottom, #ffffff 0%, #fafafa 100%) !important;
+}
+
+.bg-accent {
+    background-color: #D282A9 !important;
+}
+
+.bg-accent-transparent {
+    background-color: rgba(210, 130, 169, 0.15) !important;
+}
+
+/* Градиенты */
+.bg-gradient-accent {
+    background: linear-gradient(135deg, #D282A9 0%, #c06098 100%) !important;
+}
+
+/* Акцентные цвета */
+.accent-color {
+    color: #D282A9 !important;
+}
+
+.border-accent {
+    border-color: #D282A9 !important;
+}
+
+/* ==================== */
+/* СТИЛИ ДЛЯ СЕКЦИЙ */
+/* ==================== */
+
+/* Бейджи секций */
+.section-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    background: rgba(17, 17, 17, 0.08);
+    color: var(--oneone-black);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+/* Заголовки секций */
+.section-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--oneone-black);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.5px;
+}
+
+.section-subtitle {
+    color: var(--oneone-gray-medium);
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+}
+
+/* ==================== */
+/* КАРУСЕЛЬ ПЛАКАТОВ */
+/* ==================== */
+
+.poster-carousel {
+    height: 85vh !important;  /* ← Вернули высоту */
+    min-height: 600px;
+    max-height: 900px;
+    overflow: hidden;
+    position: relative;
+}
+
+.poster-carousel .carousel,
+.poster-carousel .carousel-inner {
+    height: 100% !important;
+}
+
+.carousel-item {
+    height: 85vh !important;  /* ← Вернули высоту */
+    min-height: 600px;
+    max-height: 900px;
+    transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.poster-wrapper {
+    height: 100% !important;
+    min-height: 600px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* Фоны для плакатов */
+.poster-wrapper:first-of-type {
+    background: linear-gradient(135deg, #2C2C2C 0%, #1A1A1A 100%);
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(255,255,255,0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.02) 0%, transparent 50%);
+}
+
+.poster-sale {
+    background: linear-gradient(135deg, #1A1A1A 0%, #3A1111 50%, #1A1A1A 100%);
+}
+
+.poster-premium {
+    background: linear-gradient(135deg, #1A1A1A 0%, #1A1A0F 50%, #1A1A1A 100%);
+    background-image: 
+        linear-gradient(135deg, #1A1A1A 0%, #1A1A0F 50%, #1A1A1A 100%),
+        radial-gradient(circle at 70% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+}
+
+/* Оверлей для читаемости */
+.poster-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(0, 0, 0, 0.3) 100%
+    );
+    z-index: 1;
+}
+
+.poster-wrapper .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Элементы плакатов - Бейдж */
+.poster-badge {
+    display: inline-block;
+    padding: 10px 24px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    border-radius: 2px;
+}
+
+.poster-badge:hover {
+    background: rgba(210, 130, 169, 0.2);
+    border-color: rgba(210, 130, 169, 0.4);
+}
+
+/* Заголовок */
+.poster-title {
+    font-size: 4rem !important;
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+/* Заголовок распродажи */
+.poster-sale-title {
+    font-size: 7rem;
+    font-weight: 200;
+    letter-spacing: -4px;
+    line-height: 1;
+    color: #ff4757;  /* Более яркий красный */
+    text-shadow: 
+        0 0 40px rgba(255, 71, 87, 0.4),
+        0 0 80px rgba(255, 71, 87, 0.2),
+        0 0 120px rgba(255, 71, 87, 0.1);
+    margin-bottom: 20px;
+    animation: saleGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes saleGlow {
+    from {
+        text-shadow: 
+            0 0 40px rgba(255, 71, 87, 0.3),
+            0 0 80px rgba(255, 71, 87, 0.15);
+    }
+    to {
+        text-shadow: 
+            0 0 60px rgba(255, 71, 87, 0.5),
+            0 0 100px rgba(255, 71, 87, 0.25);
+    }
+}
+
+/* Подзаголовок */
+.poster-subtitle {
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 500px;
+}
+
+/* Разделитель */
+.poster-divider {
+    width: 60px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.4);
+    margin: 25px 0;
+}
+
+/* Таймер распродажи */
+.sale-timer {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    padding: 20px 40px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    margin: 30px auto;
+    max-width: 450px;
+    display: inline-flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.timer-item {
+    text-align: center;
+}
+
+.timer-number {
+    font-size: 3rem;
+    font-weight: 200;
+    line-height: 1;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+    font-family: 'Montserrat', monospace;
+}
+
+.timer-label {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.timer-separator {
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.3);
+    font-weight: 200;
+}
+
+/* Кнопки карусели */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 50px !important;
+    height: 50px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(5px);
+    border-radius: 50% !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin: 0 20px !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    transition: all 0.3s ease !important;
+    opacity: 0.7 !important;
+    z-index: 10;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    opacity: 1 !important;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Индикаторы */
+.carousel-indicators {
+    bottom: 30px !important;
+    z-index: 10;
+}
+
+.carousel-indicators button {
+    width: 40px !important;
+    height: 2px !important;
+    border-radius: 0 !important;
+    background: rgba(255, 255, 255, 0.4) !important;
+    border: none !important;
+    margin: 0 5px !important;
+    transition: all 0.3s ease;
+}
+
+.carousel-indicators button.active {
+    width: 60px !important;
+    background: #fff !important;
+}
+/* ==================== */
+/* ВЫРАВНИВАНИЕ ТЕКСТА ПЛАКАТОВ */
+/* ==================== */
+
+/* Плакаты 1 и 3 - текст слева */
+.poster-wrapper:first-of-type .poster-title,
+.poster-premium .poster-title {
+    text-align: left !important;
+}
+
+.poster-wrapper:first-of-type .poster-subtitle,
+.poster-premium .poster-subtitle {
+    text-align: left !important;
+    margin-left: 0 !important;
+}
+
+/* Плакат 2 (распродажа) - всё по центру */
+.poster-sale .poster-title,
+.poster-sale .poster-sale-title {
+    text-align: center !important;
+}
+
+.poster-sale .poster-subtitle {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.poster-sale .poster-badge {
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: fit-content;
+}
+
+/* ==================== */
+/* КАРТОЧКИ ТОВАРОВ */
+/* ==================== */
+
+.product-card-home {
+    background: var(--oneone-white);
+    border: 1px solid var(--oneone-gray-border);
+    border-radius: 16px;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
+    animation-delay: calc(var(--item-index, 0) * 0.1s);
+}
+
+.product-card-home:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 20px 40px rgba(17, 17, 17, 0.15);
+    border-color: transparent;
+}
+
+/* Контейнер изображения */
+.product-card-home__image-wrapper {
+    flex: 1;
+    background-color: #f8f8f8;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 340px;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-card-home__image-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(248, 248, 248, 1) 0%,
+        rgba(245, 245, 245, 0.8) 50%,
+        rgba(242, 242, 242, 1) 100%);
+    z-index: 0;
+}
+
+/* Изображение товара */
+.product-card-home__image {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: contain;
+    transition: transform 0.8s ease;
+    filter: brightness(0.98);
+    mix-blend-mode: multiply;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.05));
+}
+
+.product-card-home:hover .product-card-home__image {
+    transform: scale(1.08);
+    filter: brightness(1);
+}
+
+/* Ссылка на изображение */
+.product-card-home__image-link {
+    display: block;
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-card-home__image-link::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 70%, rgba(255,255,255,0.3) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.product-card-home:hover .product-card-home__image-link::after {
+    opacity: 1;
+}
+
+/* Бейджи (скрыты) */
+.product-card-home__badge,
+.product-card-home__badge--new,
+.product-card-home__badge--sale,
+.product-card-home__badge--popular {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Информация о товаре */
+.product-card-home__info {
+    padding: 22px;
+    background: var(--oneone-white);
+    border-top: 1px solid rgba(234, 234, 234, 0.8);
+}
+
+.product-card-home__title {
+    font-size: 0.85rem;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #444;
+    margin-bottom: 8px;
+    height: auto;
+    min-height: 2.4em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-card-home__title-link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.product-card-home__title-link:hover {
+    color: #111;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+/* Цены */
+.product-card-home__price {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.product-card-home__price-current {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--oneone-black);
+    letter-spacing: -0.5px;
+    transition: color 0.3s ease;
+}
+
+.product-card-home:hover .product-card-home__price-current {
+    color: #111;
+}
+
+.product-card-home__price-old {
+    font-size: 0.8rem;
+    color: var(--oneone-gray-medium);
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.product-card-home__price--has-discount .product-card-home__price-current {
+    color: var(--oneone-accent-sale);
+    font-weight: 700;
+}
+
+/* ==================== */
+/* СТИЛЕВЫЕ ГИДЫ */
+/* ==================== */
+
+.style-guide-container {
+    margin-bottom: 5rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.style-guide-container:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.style-guide-header {
+    margin-bottom: 2.5rem;
+}
+
+.style-guide-header .style-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #111;
+    letter-spacing: -0.5px;
+    margin-bottom: 1rem;
+}
+
+.style-guide-header .style-description {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #555;
+    max-width: 600px;
+}
+
+.style-guide-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #111;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.style-guide-btn:hover {
+    background: #333;
+    color: white;
+    transform: translateX(5px);
+}
+
+/* ==================== */
+/* КАРТОЧКИ ПРЕИМУЩЕСТВ */
+/* ==================== */
+
+.feature-card {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background: #ffffff;
+    border-radius: 2px;
+    height: 100%;
+    transition: all 0.4s ease;
+    border: 1px solid #e0e0e0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    border-color: #d0d0d0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #111111;
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.feature-card:hover::before {
+    transform: scaleX(1);
+}
+
+.feature-icon {
+    width: 70px;
+    height: 70px;
+    background: #f0f0f0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: #111111;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    border: 1px solid #e0e0e0;
+}
+
+.feature-card:hover .feature-icon {
+    background: #111111;
+    color: #ffffff;
+    transform: scale(1.05);
+    border-color: #111111;
+}
+
+.feature-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111111;
+    margin-bottom: 1rem;
+    letter-spacing: -0.3px;
+}
+
+.feature-description {
+    color: #555555;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.feature-divider {
+    width: 40px;
+    height: 2px;
+    background: #111111;
+    margin: 1.5rem auto;
+    opacity: 0.2;
+}
+
+.feature-tag {
+    display: inline-block;
+    padding: 6px 14px;
+    background: #111111;
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-tag {
+    background: #D282A9;
+}
+
+/* ==================== */
+/* КАТЕГОРИИ */
+/* ==================== */
+
+.category-card {
+    background: var(--oneone-white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    height: 100%;
+    border: 1px solid var(--oneone-gray-border);
+}
+
+.category-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    border-color: #d1d1d1;
+}
+
+.category-image {
+    height: 200px;
+    background-color: #f5f5f5;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-content {
+    padding: 1.5rem;
+    position: relative;
+}
+
+.category-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--oneone-black);
+    margin-bottom: 0.5rem;
+}
+
+.category-count {
+    font-size: 0.875rem;
+    color: var(--oneone-gray-medium);
+    margin-bottom: 0;
+}
+
+.category-arrow {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    width: 36px;
+    height: 36px;
+    background: var(--oneone-black);
+    color: var(--oneone-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.category-card:hover .category-arrow {
+    background: var(--oneone-accent-sale);
+    transform: translateX(5px);
+}
+
+/* ==================== */
+/* КНОПКИ И ФОРМЫ */
+/* ==================== */
+
+.btn-outline-light {
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    color: #fff;
+    background: transparent;
+    padding: 14px 40px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.btn-outline-light:hover {
+    background: #fff;
+    color: #111;
+    border-color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+}
+
+.btn-hover-accent:hover {
+    background-color: #D282A9 !important;
+    border-color: #D282A9 !important;
+    color: white !important;
+}
+
+/* Email форма */
+.email-card {
+    background: #fff;
+    border-radius: 2px;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.email-icon {
+    color: #1a1a1a;
+    opacity: 0.9;
+}
+
+.email-input {
+    border-color: #ddd;
+    border-radius: 2px 0 0 2px;
+    padding-left: 20px;
+}
+
+.email-input:focus {
+    border-color: #D282A9 !important;
+    box-shadow: 0 0 0 0.25rem rgba(210, 130, 169, 0.25) !important;
+}
+
+.email-button {
+    border-radius: 0 2px 2px 0;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
+/* Ошибки форм */
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+.is-invalid:focus {
+    box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
+}
+
+.invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: #dc3545;
+}
+
+/* ==================== */
+/* УТИЛИТЫ И ВСПОМОГАТЕЛЬНЫЕ КЛАССЫ */
+/* ==================== */
+
+/* Центрирование */
+.mx-auto {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+/* Градиентный текст */
+.gradient-word {
+    background: var(--oneone-gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline;
+}
+
+.text-gradient-accent {
+    background: var(--oneone-gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Задержки анимаций */
+.delay-200 {
+    animation-delay: 200ms !important;
+}
+
+.delay-400 {
+    animation-delay: 400ms !important;
+}
+
+.delay-600 {
+    animation-delay: 600ms !important;
+}
+
+.delay-800 {
+    animation-delay: 800ms !important;
+}
+
+/* Разделители */
+.divider-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
+    margin: 2rem 0;
+}
+
+/* Блок с цитатой */
+.quote-block {
+    position: relative;
+    overflow: hidden;
+}
+
+.quote-block::before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 150px;
+    height: 150px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.quote-block::after {
+    content: "";
+    position: absolute;
+    bottom: -50px;
+    left: -50px;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+/* Эффекты */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.poster-shadow {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* ==================== */
+/* АНИМАЦИИ */
+/* ==================== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes badgeShine {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes titleFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes subtitleFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes dividerSlideIn {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 80px;
+        opacity: 1;
+    }
+}
+
+@keyframes timerFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes featuresFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes saleTitlePulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.9;
+        transform: scale(1.02);
+    }
+}
+
+@keyframes pulse-subscribe {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(210, 130, 169, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(210, 130, 169, 0);
+    }
+}
+
+.subscribe-highlight {
+    animation: pulse-subscribe 2s infinite;
+}
+
+/* ==================== */
+/* АДАПТИВНОСТЬ */
+/* ==================== */
+
+@media (max-width: 1200px) {
+    .poster-title {
+        font-size: 4rem;
+    }
+    
+    .poster-sale-title {
+        font-size: 6rem;
+    }
+    
+    .poster-wrapper .container {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    
+    .product-card-home__image-wrapper {
+        min-height: 300px;
+        padding: 25px;
+    }
+    
+    .product-card-home__image {
+        max-height: 270px;
+    }
+}
+
+@media (max-width: 992px) {
+    .poster-carousel,
+    .poster-wrapper,
+    .carousel-item {
+        /* height: 70vh; */
+        min-height: 500px;
+    }
+    
+    .poster-title {
+        font-size: 2.8rem;
+        margin-bottom: 20px;
+    }
+    
+    .poster-sale-title {
+        font-size: 4rem;
+        margin-bottom: 20px;
+    }
+    
+    .poster-subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+    }
+    
+    .poster-badge {
+        margin-bottom: 30px;
+        padding: 8px 20px;
+        font-size: 0.8rem;
+    }
+    
+    .sale-timer {
+        padding: 20px 30px;
+        margin: 30px auto;
+    }
+    
+    .timer-number {
+        font-size: 2.5rem;
+    }
+    
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 50px !important;
+        height: 50px !important;
+        margin: 0 10px !important;
+    }
+    
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        width: 18px;
+        height: 18px;
+    }
+    
+    /* Адаптивность сетки */
+    .row-cols-lg-4 {
+        --bs-columns: 3 !important;
+    }
+    
+    @media (min-width: 992px) {
+        .row-cols-lg-4 > * {
+            flex: 0 0 auto;
+            width: 33.3333333333%;
+        }
+    }
+    
+    .product-card-home__image-wrapper {
+        min-height: 260px;
+        padding: 22px;
+    }
+    
+    .product-card-home__image {
+        max-height: 220px;
+    }
+    
+    .product-card-home__info {
+        padding: 18px;
+    }
+    
+    .product-card-home__title {
+        font-size: 0.82rem;
+    }
+    
+    .product-card-home__price-current {
+        font-size: 1.1rem;
+    }
+    
+    .feature-card {
+        padding: 2rem 1.25rem;
+    }
+    
+    .style-guide-header .style-title {
+        font-size: 1.5rem;
+    }
+    
+    .style-guide-header .style-description {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .poster-carousel,
+    .poster-wrapper,
+    .carousel-item {
+        /* height: 60vh; */
+        min-height: 400px;
+    }
+    
+    .poster-title {
+        font-size: 2.2rem;
+        margin-bottom: 15px;
+    }
+    
+    .poster-sale-title {
+        font-size: 3.5rem; 
+        margin-bottom: 15px;
+    }
+    
+    .poster-subtitle {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        max-width: 100%;
+    }
+    
+    .poster-badge {
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+        padding: 6px 15px;
+        margin-bottom: 20px;
+    }
+    
+    .poster-divider {
+        margin: 20px 0;
+    }
+    
+    .sale-timer {
+        padding: 15px 20px;
+        margin: 20px auto;
+        gap: 15px;
+    }
+    
+    .timer-item {
+        padding: 0 10px;
+    }
+    
+    .timer-number {
+        font-size: 2rem;
+    }
+    
+    .timer-label {
+        font-size:  0.6rem;
+    }
+    
+    .carousel-control-prev,
+    .carousel-control-next {
+        display: none !important;
+    }
+    
+    .carousel-indicators {
+        bottom: 15px !important;
+    }
+    
+    .carousel-indicators button {
+        width: 10px !important;
+        height: 10px !important;
+        margin: 0 5px !important;
+    }
+    
+    /* Адаптивность сетки */
+    .row-cols-2 {
+        --bs-columns: 2 !important;
+    }
+    
+    .row-cols-2 > * {
+        flex: 0 0 auto;
+        width: 50%;
+    }
+    
+    .product-card-home__image-wrapper {
+        min-height: 220px;
+        padding: 20px;
+    }
+    
+    .product-card-home__image {
+        max-height: 190px;
+    }
+    
+    .product-card-home__info {
+        padding: 15px 18px 16px;
+    }
+    
+    .product-card-home__title {
+        font-size: 0.8rem;
+        min-height: 2.2em;
+    }
+    
+    .product-card-home:hover {
+        transform: translateY(-6px) scale(1.01);
+    }
+    
+    .feature-card {
+        margin-bottom: 1rem;
+    }
+    
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.3rem;
+    }
+    
+    .feature-title {
+        font-size: 1.1rem;
+    }
+    
+    .feature-description {
+        font-size: 0.9rem;
+    }
+    
+    .style-guide-header {
+        margin-bottom: 2rem;
+    }
+    
+    .style-guide-header .style-title {
+        font-size: 1.3rem;
+    }
+    
+    .style-guide-header .style-description {
+        font-size: 0.95rem;
+    }
+    
+    .style-guide-btn {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .quote-block::before,
+    .quote-block::after {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .poster-carousel,
+    .poster-wrapper,
+    .carousel-item {
+        /* height: 50vh; */
+        min-height: 350px;
+    }
+    
+    .poster-title {
+        font-size: 2rem;
+    }
+    
+    .poster-sale-title {
+        font-size: 2.5rem;
+    }
+    
+    .poster-badge {
+        font-size: 0.65rem;
+        padding: 5px 12px;
+    }
+    
+    .btn-outline-light {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+    
+    /* Адаптивность сетки */
+    .row-cols-2 {
+        --bs-columns: 1 !important;
+    }
+    
+    .row-cols-2 > * {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+    
+    .product-card-home__image-wrapper {
+        min-height: 300px;
+        padding: 25px;
+    }
+    
+    .product-card-home__image {
+        max-height: 260px;
+    }
+    
+    .style-guide-content {
+        padding: 1.5rem;
+    }
+    
+    .style-guide-header .style-title {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-height: 600px) {
+    .poster-carousel,
+    .poster-wrapper,
+    .carousel-item {
+        /* height: 100vh; */
+        min-height: auto;
+    }
+}
+
+/* Для слабых устройств */
+@media (prefers-reduced-motion: reduce) {
+    .poster-carousel * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ==================== */
+/* ИСПРАВЛЕНИЕ ДЛЯ ТЕКСТА РАСПРОДАЖИ */
+/* ==================== */
+
+.poster-sale .poster-subtitle {
+    text-align: center !important;
+    font-size: 1.2rem !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 100% !important;
+}
+
+/* Также для контейнера текста на втором плакате */
+.poster-sale .col-lg-10.col-xl-8 {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+}
+/* ==================== */
+/* ИСПРАВЛЕНИЕ ВЫРАВНИВАНИЯ ПЛАКАТОВ */
+/* ==================== */
+
+/* Первый и третий плакаты - текст слева */
+.poster-wrapper:first-of-type .poster-subtitle,
+.poster-premium .poster-subtitle {
+    text-align: left !important;
+}
+
+/* Второй плакат (распродажа) - текст по центру */
+.poster-sale .poster-subtitle {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* Заголовки для первого и третьего плакатов */
+.poster-wrapper:first-of-type .poster-title,
+.poster-premium .poster-title {
+    text-align: left !important;
+}
+
+/* Заголовок распродажи по центру */
+.poster-sale .poster-title,
+.poster-sale .poster-sale-title {
+    text-align: center !important;
+}
+
+/* Бейджи */
+.poster-wrapper:first-of-type .poster-badge,
+.poster-premium .poster-badge {
+    text-align: left !important;
+    display: inline-block !important;
+}
+
+.poster-sale .poster-badge {
+    text-align: center !important;
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+/* ==================== */
+/* ИСПРАВЛЕНИЕ ДЛЯ ВТОРОГО ПЛАКАТА */
+/* ==================== */
+
+/* Контейнер второго плаката - всё по центру */
+.poster-sale .row {
+    text-align: center !important;
+    justify-content: center !important;
+}
+
+.poster-sale .col-lg-10 {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+}
+
+/* Подзаголовок распродажи */
+.poster-sale .poster-subtitle {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    float: none !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Заголовок распродажи */
+.poster-sale .poster-sale-title {
+    text-align: center !important;
+    display: block !important;
+    width: 100% !important;
+}
+
+/* Бейдж */
+.poster-sale .poster-badge {
+    display: inline-block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* Таймер */
+.poster-sale .sale-timer {
+    display: flex !important;
+    justify-content: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* Кнопка */
+.poster-sale .btn {
+    display: inline-block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* ==================== */
+/* ФИКС СЕТКИ ДЛЯ КАРТОЧЕК В ПОИСКЕ И КАТАЛОГЕ */
+/* ==================== */
+
+/* Исправление для product-card (используется в поиске/каталоге) */
+.product-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* Фикс для контейнера сетки */
+.row > .col {
+    display: flex;
+}
+
+/* ВАЖНО: Сохраняем отступы Bootstrap g-4 */
+.row.g-4 {
+    --bs-gutter-y: 1.5rem;
+    --bs-gutter-x: 1.5rem;
+}
+
+.row.g-4 > .col {
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-top: var(--bs-gutter-y);
+}
+
+/* Фикс для изображений внутри product-card */
+.product-image-wrapper {
+    flex-shrink: 0;
+    height: 300px;
+    background-color: #f8f9fa;
+    overflow: hidden;
+}
+
+.product-image {
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    width: 100%;
+}
+
+/* Информация о товаре */
+.product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    .product-image-wrapper {
+        height: 250px;
+    }
+    
+    /* На мобильных показываем по 2 карточки */
+    .row-cols-2 > .col {
+        flex: 0 0 auto;
+        width: 50%;
+    }
+}
+
+@media (max-width: 576px) {
+    /* На очень маленьких экранах - по 1 карточке */
+    .row-cols-2 > .col {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+}
+
+/* ==================== */
+/* ФИКС ЛИПКОГО НАВБАРА */
+/* ==================== */
+
+.navbar {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1030 !important;
+    background-color: rgba(255, 255, 255, 0.97) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border-bottom: 1px solid #e0e0e0 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* ==================== */
+/* ФИКС ЛИПКОГО НАВБАРА - СИЛЬНЫЙ */
+/* ==================== */
+
+header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1030 !important;
+}
+
+.navbar {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1030 !important;
+    background-color: rgba(255, 255, 255, 0.97) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border-bottom: 1px solid #e0e0e0 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Чтобы контент не залезал под навбар */
+main {
+    position: relative;
+    z-index: 1;
+}
+
+/* ==================== */
+/* ФИКС МОДАЛЬНЫХ ОКОН */
+/* ==================== */
+
+/* Убираем серую пелену Bootstrap */
+.modal-backdrop {
+    display: none !important;
+}
+
+/* Все модальные окна должны быть поверх всего */
+.modal {
+    z-index: 9999 !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+}
+
+.modal-dialog {
+    z-index: 10000 !important;
+    pointer-events: auto !important;
+}
+
+.modal-content {
+    pointer-events: auto !important;
+    opacity: 1 !important;
+}
+
+/* Кнопки внутри модального окна */
+.modal-body .size-option-modal,
+.modal-body button {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    position: relative;
+    z-index: 10001 !important;
+}
+
+/* Для конкретного модального окна размеров */
+#sizeSelectionModal {
+    z-index: 9999 !important;
+}
+
+#sizeSelectionModal .modal-dialog {
+    z-index: 10000 !important;
+}
+
+#sizeSelectionModal .size-option-modal {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+}
+
+/* Опускаем z-index у навбара чтобы не перекрывал модалки */
+.navbar {
+    z-index: 1030 !important;
+}
+
+header {
+    z-index: 1030 !important;
+}
+
+.profile-dropdown {
+    z-index: 1031 !important;
+}
+body, .product-detail-page, .catalog-page {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
