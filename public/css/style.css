@@ -86,248 +86,156 @@
     margin-bottom: 2.5rem;
 }
 
+
+
 /* ==================== */
 /* КАРУСЕЛЬ ПЛАКАТОВ */
 /* ==================== */
 
 .poster-carousel {
-    height: 85vh !important;  /* ← Вернули высоту */
-    min-height: 600px;
-    max-height: 900px;
-    overflow: hidden;
     position: relative;
+    z-index: 1;
+    height: 85vh;
+    min-height: 500px;
+    max-height: 800px;
+    overflow: hidden;
 }
-
 .poster-carousel .carousel,
-.poster-carousel .carousel-inner {
-    height: 100% !important;
-}
-
-.carousel-item {
-    height: 85vh !important;  /* ← Вернули высоту */
-    min-height: 600px;
-    max-height: 900px;
-    transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
+.poster-carousel .carousel-inner,
+.poster-carousel .carousel-item { height: 100%; }
+.carousel-item { transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
 .poster-wrapper {
-    height: 100% !important;
-    min-height: 600px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    height: 100%;
     display: flex;
     align-items: center;
+    background-size: cover;
+    background-position: center;
     position: relative;
 }
-
-/* Фоны для плакатов */
-.poster-wrapper:first-of-type {
-    background: linear-gradient(135deg, #2C2C2C 0%, #1A1A1A 100%);
-    background-image: 
-        radial-gradient(circle at 20% 50%, rgba(255,255,255,0.03) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.02) 0%, transparent 50%);
-}
-
-.poster-sale {
-    background: linear-gradient(135deg, #1A1A1A 0%, #3A1111 50%, #1A1A1A 100%);
-}
-
-.poster-premium {
-    background: linear-gradient(135deg, #1A1A1A 0%, #1A1A0F 50%, #1A1A1A 100%);
-    background-image: 
-        linear-gradient(135deg, #1A1A1A 0%, #1A1A0F 50%, #1A1A1A 100%),
-        radial-gradient(circle at 70% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
-}
-
-/* Оверлей для читаемости */
 .poster-wrapper::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-        to right,
-        rgba(0, 0, 0, 0.7) 0%,
-        rgba(0, 0, 0, 0.3) 100%
-    );
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
     z-index: 1;
 }
-
-.poster-wrapper .container {
-    position: relative;
-    z-index: 2;
-}
-
-/* Элементы плакатов - Бейдж */
+.poster-wrapper .container { position: relative; z-index: 2; padding: 60px 0; }
 .poster-badge {
     display: inline-block;
-    padding: 10px 24px;
-    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 18px;
+    background: rgba(255,255,255,0.1);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255,255,255,0.2);
     color: #fff;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 500;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     border-radius: 2px;
 }
-
-.poster-badge:hover {
-    background: rgba(210, 130, 169, 0.2);
-    border-color: rgba(210, 130, 169, 0.4);
-}
-
-/* Заголовок */
 .poster-title {
-    font-size: 4rem !important;
+    font-size: 3.5rem;
     font-weight: 300;
-    line-height: 1.15;
-    margin-bottom: 20px;
+    line-height: 1.1;
+    margin-bottom: 15px;
     letter-spacing: -1px;
     color: #fff;
     text-transform: uppercase;
 }
-
-/* Заголовок распродажи */
 .poster-sale-title {
-    font-size: 7rem;
+    font-size: 5rem;
     font-weight: 200;
-    letter-spacing: -4px;
+    letter-spacing: -3px;
     line-height: 1;
-    color: #ff4757;  /* Более яркий красный */
-    text-shadow: 
-        0 0 40px rgba(255, 71, 87, 0.4),
-        0 0 80px rgba(255, 71, 87, 0.2),
-        0 0 120px rgba(255, 71, 87, 0.1);
-    margin-bottom: 20px;
+    color: #ff4757;
+    text-shadow: 0 0 40px rgba(255,71,87,0.3);
+    margin-bottom: 15px;
     animation: saleGlow 2s ease-in-out infinite alternate;
 }
-
-@keyframes saleGlow {
-    from {
-        text-shadow: 
-            0 0 40px rgba(255, 71, 87, 0.3),
-            0 0 80px rgba(255, 71, 87, 0.15);
-    }
-    to {
-        text-shadow: 
-            0 0 60px rgba(255, 71, 87, 0.5),
-            0 0 100px rgba(255, 71, 87, 0.25);
-    }
-}
-
-/* Подзаголовок */
 .poster-subtitle {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 300;
-    line-height: 1.6;
-    margin-bottom: 30px;
-    color: rgba(255, 255, 255, 0.8);
-    max-width: 500px;
+    opacity: 0.85;
+    margin-bottom: 25px;
+    max-width: 400px;
+    color: rgba(255,255,255,0.8);
 }
+.poster-divider { width: 50px; height: 2px; background: rgba(255,255,255,0.4); margin: 20px 0; }
 
-/* Разделитель */
-.poster-divider {
-    width: 60px;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.4);
-    margin: 25px 0;
+/* 🔥 ФОНЫ С АНИМАЦИЕЙ */
+.carousel-item:nth-child(1) .poster-wrapper {
+    background: linear-gradient(135deg, #1a0a0f 0%, #2d1118 30%, #3a1520 60%, #2d1118 100%);
+    background-size: 400% 400%;
+    animation: bgShimmer1 8s ease infinite;
 }
+.poster-sale {
+    background: linear-gradient(135deg, #1A1A1A 0%, #3A1111 50%, #1A1A1A 100%);
+    background-size: 200% 200%;
+    animation: bgPulse 4s ease-in-out infinite alternate;
+}
+.poster-premium {
+    background: linear-gradient(135deg, #1a0a0a 0%, #2d1111 30%, #3a1a1a 60%, #2d1111 100%);
+    background-size: 400% 400%;
+    animation: bgShimmer2 10s ease infinite;
+}
+@keyframes bgShimmer1 { 0%{background-position:0 50%} 50%{background-position:100% 50%} 100%{background-position:0 50%} }
+@keyframes bgPulse { 0%{background-position:0 50%} 100%{background-position:100% 50%} }
+@keyframes bgShimmer2 { 0%{background-position:0 50%} 50%{background-position:100% 50%} 100%{background-position:0 50%} }
+@keyframes saleGlow { from{text-shadow:0 0 30px rgba(255,71,87,.3)} to{text-shadow:0 0 50px rgba(255,71,87,.5)} }
 
-/* Таймер распродажи */
+/* Таймер */
 .sale-timer {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(10px);
-    padding: 20px 40px;
-    border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    margin: 30px auto;
-    max-width: 450px;
-    display: inline-flex;
-    align-items: center;
-    gap: 30px;
+    display: inline-flex; align-items: center; gap: 20px;
+    background: rgba(255,255,255,0.08); backdrop-filter: blur(10px);
+    padding: 15px 25px; border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.15); margin: 20px auto;
 }
+.timer-item { text-align: center; }
+.timer-number { font-size: 2.5rem; font-weight: 200; color: #fff; }
+.timer-label { font-size: 0.65rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 2px; }
+.timer-separator { font-size: 2rem; color: rgba(255,255,255,0.3); }
 
-.timer-item {
-    text-align: center;
+/* Навигация */
+.carousel-control-prev, .carousel-control-next {
+    width: 40px; height: 40px; background: rgba(255,255,255,0.1);
+    border-radius: 50%; top: 50%; transform: translateY(-50%);
+    margin: 0 15px; opacity: 0.7; z-index: 10; border: none;
 }
+.carousel-control-prev:hover, .carousel-control-next:hover { opacity: 1; }
+.carousel-indicators { bottom: 20px; }
+.carousel-indicators button { width: 30px; height: 2px; background: rgba(255,255,255,0.4); border: none; }
+.carousel-indicators button.active { width: 40px; background: #fff; }
 
-.timer-number {
-    font-size: 3rem;
-    font-weight: 200;
-    line-height: 1;
-    color: #fff;
-    font-variant-numeric: tabular-nums;
-    font-family: 'Montserrat', monospace;
+/* Адаптивность */
+@media (max-width: 768px) {
+    .poster-carousel { height: 55vh; min-height: 380px; }
+    .poster-wrapper .container { text-align: center !important; padding: 30px 15px; }
+    .poster-wrapper .row { justify-content: center !important; text-align: center !important; }
+    .poster-wrapper .col-lg-6 { text-align: center !important; }
+    .poster-title { font-size: 2rem; text-align: center !important; letter-spacing: 0; }
+    .poster-sale-title { font-size: 3rem; text-align: center !important; }
+    .poster-subtitle { 
+        font-size: 0.85rem; 
+        max-width: 100% !important; 
+        margin-left: auto !important; 
+        margin-right: auto !important; 
+        text-align: center !important; 
+    }
+    .poster-badge { 
+        display: block !important; 
+        margin: 0 auto 15px !important; 
+        text-align: center !important; 
+    }
+    .poster-divider { margin: 15px auto !important; }
+    .timer-number { font-size: 1.8rem; }
+    .carousel-control-prev, .carousel-control-next { display: none; }
 }
-
-.timer-label {
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.5);
-    margin-top: 8px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.timer-separator {
-    font-size: 2.5rem;
-    color: rgba(255, 255, 255, 0.3);
-    font-weight: 200;
-}
-
-/* Кнопки карусели */
-.carousel-control-prev,
-.carousel-control-next {
-    width: 50px !important;
-    height: 50px !important;
-    background: rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: blur(5px);
-    border-radius: 50% !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    margin: 0 20px !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    transition: all 0.3s ease !important;
-    opacity: 0.7 !important;
-    z-index: 10;
-}
-
-.carousel-control-prev:hover,
-.carousel-control-next:hover {
-    background: rgba(255, 255, 255, 0.2) !important;
-    opacity: 1 !important;
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    width: 20px;
-    height: 20px;
-}
-
-/* Индикаторы */
-.carousel-indicators {
-    bottom: 30px !important;
-    z-index: 10;
-}
-
-.carousel-indicators button {
-    width: 40px !important;
-    height: 2px !important;
-    border-radius: 0 !important;
-    background: rgba(255, 255, 255, 0.4) !important;
-    border: none !important;
-    margin: 0 5px !important;
-    transition: all 0.3s ease;
-}
-
-.carousel-indicators button.active {
-    width: 60px !important;
-    background: #fff !important;
+@media (max-width: 576px) {
+    .poster-carousel { height: 50vh; min-height: 320px; }
+    .poster-title { font-size: 1.6rem; }
+    .poster-sale-title { font-size: 2.5rem; }
+    .timer-number { font-size: 1.5rem; }
 }
 /* ==================== */
 /* ВЫРАВНИВАНИЕ ТЕКСТА ПЛАКАТОВ */
@@ -767,17 +675,6 @@
 /* КНОПКИ И ФОРМЫ */
 /* ==================== */
 
-.btn-outline-light {
-    border: 2px solid rgba(255, 255, 255, 0.8);
-    color: #fff;
-    background: transparent;
-    padding: 14px 40px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-}
 
 .btn-outline-light:hover {
     background: #fff;
@@ -1043,18 +940,6 @@
 /* ==================== */
 
 @media (max-width: 1200px) {
-    .poster-title {
-        font-size: 4rem;
-    }
-    
-    .poster-sale-title {
-        font-size: 6rem;
-    }
-    
-    .poster-wrapper .container {
-        padding-left: 40px;
-        padding-right: 40px;
-    }
     
     .product-card-home__image-wrapper {
         min-height: 300px;
@@ -1066,307 +951,6 @@
     }
 }
 
-@media (max-width: 992px) {
-    .poster-carousel,
-    .poster-wrapper,
-    .carousel-item {
-        /* height: 70vh; */
-        min-height: 500px;
-    }
-    
-    .poster-title {
-        font-size: 2.8rem;
-        margin-bottom: 20px;
-    }
-    
-    .poster-sale-title {
-        font-size: 4rem;
-        margin-bottom: 20px;
-    }
-    
-    .poster-subtitle {
-        font-size: 1.2rem;
-        margin-bottom: 30px;
-    }
-    
-    .poster-badge {
-        margin-bottom: 30px;
-        padding: 8px 20px;
-        font-size: 0.8rem;
-    }
-    
-    .sale-timer {
-        padding: 20px 30px;
-        margin: 30px auto;
-    }
-    
-    .timer-number {
-        font-size: 2.5rem;
-    }
-    
-    .carousel-control-prev,
-    .carousel-control-next {
-        width: 50px !important;
-        height: 50px !important;
-        margin: 0 10px !important;
-    }
-    
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-        width: 18px;
-        height: 18px;
-    }
-    
-    /* Адаптивность сетки */
-    .row-cols-lg-4 {
-        --bs-columns: 3 !important;
-    }
-    
-    @media (min-width: 992px) {
-        .row-cols-lg-4 > * {
-            flex: 0 0 auto;
-            width: 33.3333333333%;
-        }
-    }
-    
-    .product-card-home__image-wrapper {
-        min-height: 260px;
-        padding: 22px;
-    }
-    
-    .product-card-home__image {
-        max-height: 220px;
-    }
-    
-    .product-card-home__info {
-        padding: 18px;
-    }
-    
-    .product-card-home__title {
-        font-size: 0.82rem;
-    }
-    
-    .product-card-home__price-current {
-        font-size: 1.1rem;
-    }
-    
-    .feature-card {
-        padding: 2rem 1.25rem;
-    }
-    
-    .style-guide-header .style-title {
-        font-size: 1.5rem;
-    }
-    
-    .style-guide-header .style-description {
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .poster-carousel,
-    .poster-wrapper,
-    .carousel-item {
-        /* height: 60vh; */
-        min-height: 400px;
-    }
-    
-    .poster-title {
-        font-size: 2.2rem;
-        margin-bottom: 15px;
-    }
-    
-    .poster-sale-title {
-        font-size: 3.5rem; 
-        margin-bottom: 15px;
-    }
-    
-    .poster-subtitle {
-        font-size: 1rem;
-        line-height: 1.6;
-        margin-bottom: 20px;
-        max-width: 100%;
-    }
-    
-    .poster-badge {
-        font-size: 0.7rem;
-        letter-spacing: 2px;
-        padding: 6px 15px;
-        margin-bottom: 20px;
-    }
-    
-    .poster-divider {
-        margin: 20px 0;
-    }
-    
-    .sale-timer {
-        padding: 15px 20px;
-        margin: 20px auto;
-        gap: 15px;
-    }
-    
-    .timer-item {
-        padding: 0 10px;
-    }
-    
-    .timer-number {
-        font-size: 2rem;
-    }
-    
-    .timer-label {
-        font-size:  0.6rem;
-    }
-    
-    .carousel-control-prev,
-    .carousel-control-next {
-        display: none !important;
-    }
-    
-    .carousel-indicators {
-        bottom: 15px !important;
-    }
-    
-    .carousel-indicators button {
-        width: 10px !important;
-        height: 10px !important;
-        margin: 0 5px !important;
-    }
-    
-    /* Адаптивность сетки */
-    .row-cols-2 {
-        --bs-columns: 2 !important;
-    }
-    
-    .row-cols-2 > * {
-        flex: 0 0 auto;
-        width: 50%;
-    }
-    
-    .product-card-home__image-wrapper {
-        min-height: 220px;
-        padding: 20px;
-    }
-    
-    .product-card-home__image {
-        max-height: 190px;
-    }
-    
-    .product-card-home__info {
-        padding: 15px 18px 16px;
-    }
-    
-    .product-card-home__title {
-        font-size: 0.8rem;
-        min-height: 2.2em;
-    }
-    
-    .product-card-home:hover {
-        transform: translateY(-6px) scale(1.01);
-    }
-    
-    .feature-card {
-        margin-bottom: 1rem;
-    }
-    
-    .feature-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 1.3rem;
-    }
-    
-    .feature-title {
-        font-size: 1.1rem;
-    }
-    
-    .feature-description {
-        font-size: 0.9rem;
-    }
-    
-    .style-guide-header {
-        margin-bottom: 2rem;
-    }
-    
-    .style-guide-header .style-title {
-        font-size: 1.3rem;
-    }
-    
-    .style-guide-header .style-description {
-        font-size: 0.95rem;
-    }
-    
-    .style-guide-btn {
-        padding: 8px 20px;
-        font-size: 0.9rem;
-    }
-    
-    .quote-block::before,
-    .quote-block::after {
-        display: none;
-    }
-}
-
-@media (max-width: 576px) {
-    .poster-carousel,
-    .poster-wrapper,
-    .carousel-item {
-        /* height: 50vh; */
-        min-height: 350px;
-    }
-    
-    .poster-title {
-        font-size: 2rem;
-    }
-    
-    .poster-sale-title {
-        font-size: 2.5rem;
-    }
-    
-    .poster-badge {
-        font-size: 0.65rem;
-        padding: 5px 12px;
-    }
-    
-    .btn-outline-light {
-        padding: 12px 20px;
-        font-size: 0.9rem;
-    }
-    
-    /* Адаптивность сетки */
-    .row-cols-2 {
-        --bs-columns: 1 !important;
-    }
-    
-    .row-cols-2 > * {
-        flex: 0 0 auto;
-        width: 100%;
-    }
-    
-    .product-card-home__image-wrapper {
-        min-height: 300px;
-        padding: 25px;
-    }
-    
-    .product-card-home__image {
-        max-height: 260px;
-    }
-    
-    .style-guide-content {
-        padding: 1.5rem;
-    }
-    
-    .style-guide-header .style-title {
-        font-size: 1.2rem;
-    }
-}
-
-@media (max-height: 600px) {
-    .poster-carousel,
-    .poster-wrapper,
-    .carousel-item {
-        /* height: 100vh; */
-        min-height: auto;
-    }
-}
 
 /* Для слабых устройств */
 @media (prefers-reduced-motion: reduce) {
@@ -1377,124 +961,6 @@
     }
 }
 
-/* ==================== */
-/* ИСПРАВЛЕНИЕ ДЛЯ ТЕКСТА РАСПРОДАЖИ */
-/* ==================== */
-
-.poster-sale .poster-subtitle {
-    text-align: center !important;
-    font-size: 1.2rem !important;
-    color: rgba(255, 255, 255, 0.85) !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    max-width: 100% !important;
-}
-
-/* Также для контейнера текста на втором плакате */
-.poster-sale .col-lg-10.col-xl-8 {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-}
-/* ==================== */
-/* ИСПРАВЛЕНИЕ ВЫРАВНИВАНИЯ ПЛАКАТОВ */
-/* ==================== */
-
-/* Первый и третий плакаты - текст слева */
-.poster-wrapper:first-of-type .poster-subtitle,
-.poster-premium .poster-subtitle {
-    text-align: left !important;
-}
-
-/* Второй плакат (распродажа) - текст по центру */
-.poster-sale .poster-subtitle {
-    text-align: center !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
-/* Заголовки для первого и третьего плакатов */
-.poster-wrapper:first-of-type .poster-title,
-.poster-premium .poster-title {
-    text-align: left !important;
-}
-
-/* Заголовок распродажи по центру */
-.poster-sale .poster-title,
-.poster-sale .poster-sale-title {
-    text-align: center !important;
-}
-
-/* Бейджи */
-.poster-wrapper:first-of-type .poster-badge,
-.poster-premium .poster-badge {
-    text-align: left !important;
-    display: inline-block !important;
-}
-
-.poster-sale .poster-badge {
-    text-align: center !important;
-    display: block !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-/* ==================== */
-/* ИСПРАВЛЕНИЕ ДЛЯ ВТОРОГО ПЛАКАТА */
-/* ==================== */
-
-/* Контейнер второго плаката - всё по центру */
-.poster-sale .row {
-    text-align: center !important;
-    justify-content: center !important;
-}
-
-.poster-sale .col-lg-10 {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-}
-
-/* Подзаголовок распродажи */
-.poster-sale .poster-subtitle {
-    text-align: center !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    float: none !important;
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
-}
-
-/* Заголовок распродажи */
-.poster-sale .poster-sale-title {
-    text-align: center !important;
-    display: block !important;
-    width: 100% !important;
-}
-
-/* Бейдж */
-.poster-sale .poster-badge {
-    display: inline-block !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
-/* Таймер */
-.poster-sale .sale-timer {
-    display: flex !important;
-    justify-content: center !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
-/* Кнопка */
-.poster-sale .btn {
-    display: inline-block !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
 
 /* ==================== */
 /* ФИКС СЕТКИ ДЛЯ КАРТОЧЕК В ПОИСКЕ И КАТАЛОГЕ */
@@ -1575,20 +1041,6 @@
     }
 }
 
-/* ==================== */
-/* ФИКС ЛИПКОГО НАВБАРА */
-/* ==================== */
-
-.navbar {
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 1030 !important;
-    background-color: rgba(255, 255, 255, 0.97) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    border-bottom: 1px solid #e0e0e0 !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
-}
 
 /* ==================== */
 /* ФИКС ЛИПКОГО НАВБАРА - СИЛЬНЫЙ */
@@ -1679,4 +1131,125 @@ header {
 }
 body, .product-detail-page, .catalog-page {
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+/* ==================== */
+/* ТАЙМЕР — АДАПТИВНЫЙ (ФИНАЛЬНЫЙ) */
+/* ==================== */
+
+@media (max-width: 768px) {
+    .sale-timer {
+        gap: 10px !important;
+        padding: 10px 15px !important;
+        margin: 15px auto !important;
+        max-width: 260px !important;
+    }
+    .timer-item {
+        min-width: 40px !important;
+        padding: 0 5px !important;
+    }
+    .timer-number {
+        font-size: 1.8rem !important;
+    }
+    .timer-separator {
+        font-size: 1.5rem !important;
+    }
+    .timer-label {
+        font-size: 0.55rem !important;
+        letter-spacing: 1px !important;
+        margin-top: 3px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .sale-timer {
+        gap: 6px !important;
+        padding: 8px 10px !important;
+        margin: 10px auto !important;
+        max-width: 200px !important;
+    }
+    .timer-item {
+        min-width: 32px !important;
+        padding: 0 3px !important;
+    }
+    .timer-number {
+        font-size: 1.4rem !important;
+    }
+    .timer-separator {
+        font-size: 1.1rem !important;
+    }
+    .timer-label {
+        font-size: 0.5rem !important;
+        letter-spacing: 0.5px !important;
+    }
+}
+
+@media (max-width: 400px) {
+    .sale-timer {
+        gap: 4px !important;
+        padding: 6px 8px !important;
+        max-width: 160px !important;
+    }
+    .timer-item {
+        min-width: 28px !important;
+        padding: 0 2px !important;
+    }
+    .timer-number {
+        font-size: 1.1rem !important;
+    }
+    .timer-separator {
+        font-size: 0.9rem !important;
+    }
+    .timer-label {
+        font-size: 0.4rem !important;
+        letter-spacing: 0 !important;
+    }
+}
+/* ==================== */
+/* КНОПКИ ПЛАКАТОВ — АДАПТИВ */
+/* ==================== */
+
+.poster-wrapper .btn-outline-light {
+    display: inline-block;
+    padding: 12px 28px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    color: #fff;
+    background: transparent;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.poster-wrapper .btn-outline-light:hover {
+    background: #fff;
+    color: #111;
+    border-color: #fff;
+}
+
+@media (max-width: 768px) {
+    .poster-wrapper .btn-outline-light {
+        padding: 10px 20px;
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
+    }
+}
+
+@media (max-width: 576px) {
+    .poster-wrapper .btn-outline-light {
+        padding: 8px 16px;
+        font-size: 0.7rem;
+        letter-spacing: 0.5px;
+        border-width: 1px;
+    }
+}
+
+@media (max-width: 400px) {
+    .poster-wrapper .btn-outline-light {
+        padding: 6px 14px;
+        font-size: 0.65rem;
+    }
 }
