@@ -668,4 +668,40 @@ private function formatImageUrl($url)
     // Если нет, добавляем 'images/' и используем asset()
     return asset('images/' . $url);
 }
+/**
+ * Получить размеры товара для модального окна
+ */
+public function getSizes($id)
+{
+    $product = Product::with('sizes')->find($id);
+    
+    if (!$product) {
+        return response()->json(['success' => false, 'message' => 'Товар не найден']);
+    }
+    
+    // Убираем дубликаты размеров по названию
+    $sizes = $product->sizes
+        ->unique('name')  // ← Убираем дубликаты
+        ->filter(function($size) {
+            $stock = $size->pivot->stock ?? $size->stock ?? 0;
+            return $stock > 0; // ← Только доступные размеры
+        })
+        ->map(function($size) {
+            return [
+                'id' => $size->id,
+                'name' => $size->name,
+                'stock' => $size->pivot->stock ?? $size->stock ?? 0,
+            ];
+        })
+        ->values(); // ← Сброс ключей
+    
+    return response()->json([
+        'success' => true,
+        'product_title' => $product->title,
+        'sizes' => $sizes
+    ]);
+}
+
+
+
 }

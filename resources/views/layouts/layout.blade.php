@@ -559,6 +559,47 @@
             z-index: 1000 !important;
         }
     }
+
+    /* Модальное окно выбора размера из карточки */
+.sizes-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.size-option-btn {
+    padding: 10px 18px;
+    border: 2px solid #e0e0e0;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.size-option-btn:hover:not(.disabled) {
+    border-color: #111;
+    background: #f8f8f8;
+}
+
+.size-option-btn.selected {
+    border-color: #111;
+    background: #111;
+    color: white;
+}
+
+.size-option-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+.size-value {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
 </style>
 </head>
 
@@ -1085,11 +1126,148 @@ function updateWishlistBadge(count) {
     });
 }
 
+
 // Добавление в корзину
 function addToCart(productId, buttonElement = null) {
     const button = buttonElement || (event && event.target ? event.target.closest('button') : null);
     if (!button) return;
     
+    // 🔥 Открываем модальное окно выбора размера
+    showSizeSelectionModal(productId, button);
+}
+
+// 🔥 Функция показа модального окна выбора размера
+function showSizeSelectionModal(productId, button) {
+    const originalHtml = button.innerHTML;
+    button.disabled = true;
+    button.innerHTML = '<i class="bi bi-hourglass-split"></i>';
+    
+    fetch(`/product/${productId}/sizes`)
+        .then(response => response.json())
+        .then(data => {
+            button.disabled = false;
+            button.innerHTML = originalHtml;
+            
+            if (data.success && data.sizes && data.sizes.length > 0) {
+                const sizeOptions = data.sizes.map(size => {
+                    const available = size.stock > 0;
+                    return `
+                        <button type="button" 
+                            class="size-option-btn ${!available ? 'disabled' : ''}"
+                            data-size-name="${size.name}"
+                            data-stock="${size.stock}"
+                            onclick="selectCartSize('${size.name}', this)">
+                            <span class="size-value">${size.name}</span>
+                        </button>
+                    `;
+                }).join('');
+                
+                const modalHtml = `
+                    <div class="modal fade" id="sizeSelectionCartModal" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered modal-sm">
+                            <div class="modal-content border-0 shadow">
+                                <div class="modal-header border-0">
+                                    <h5 class="modal-title">Выберите размер</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <p class="text-muted small mb-3">${data.product_title || ''}</p>
+                                    <div class="sizes-grid justify-content-center">
+                                        ${sizeOptions}
+                                    </div>
+                                    <p id="sizeCartError" class="text-danger small mt-2 d-none">Выберите размер</p>
+                                </div>
+                                <div class="modal-footer border-0 justify-content-center">
+                                    <button type="button" class="btn btn-outline-dark btn-sm" data-bs-dismiss="modal">Отмена</button>
+                                    <button type="button" class="btn btn-dark btn-sm" id="confirmCartSizeBtn" disabled
+                                        onclick="confirmCartSize(${productId}, this)">
+                                        В корзину
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                const oldModal = document.getElementById('sizeSelectionCartModal');
+                if (oldModal) oldModal.remove();
+                
+                document.body.insertAdjacentHTML('beforeend', modalHtml);
+                const modal = new bootstrap.Modal(document.getElementById('sizeSelectionCartModal'));
+                modal.show();
+                
+                window._cartSelectedSize = null;
+                
+                document.getElementById('sizeSelectionCartModal').addEventListener('hidden.bs.modal', function() {
+                    this.remove();
+                    window._cartSelectedSize = null;
+                });
+            } else {
+                // Если размеров нет — добавляем без выбора
+                addToCartDirect(productId, button);
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+            button.disabled = false;
+            button.innerHTML = originalHtml;
+            addToCartDirect(productId, button);
+        });
+}
+
+// Выбор размера в модальном окне корзины
+function selectCartSize(sizeName, element) {
+    document.querySelectorAll('#sizeSelectionCartModal .size-option-btn').forEach(b => b.classList.remove('selected'));
+    element.classList.add('selected');
+    window._cartSelectedSize = sizeName;
+    document.getElementById('confirmCartSizeBtn').disabled = false;
+    document.getElementById('sizeCartError').classList.add('d-none');
+}
+
+// Подтверждение и добавление в корзину
+function confirmCartSize(productId, button) {
+    const sizeName = window._cartSelectedSize;
+    
+    if (!sizeName) {
+        document.getElementById('sizeCartError').classList.remove('d-none');
+        return;
+    }
+    
+    const modal = bootstrap.Modal.getInstance(document.getElementById('sizeSelectionCartModal'));
+    modal.hide();
+    
+    const cartButton = document.querySelector(`button[onclick*="addToCart(${productId}"]`);
+    
+    fetch('/cart/add', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            product_id: productId,
+            quantity: 1,
+            size: sizeName
+        })
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.success) {
+            updateCartBadge(data.cart_count);
+            showToast(data.message || 'Товар добавлен в корзину!');
+        } else {
+            showToast(data.message || 'Ошибка', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+        showToast('Ошибка соединения', 'error');
+    });
+}
+
+// Прямое добавление без размера
+function addToCartDirect(productId, button) {
     const originalHtml = button.innerHTML;
     button.disabled = true;
     button.innerHTML = '<i class="bi bi-hourglass-split"></i>';
@@ -1099,27 +1277,22 @@ function addToCart(productId, buttonElement = null) {
         headers: {
             'Content-Type': 'application/json',
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            'Accept': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest'
+            'Accept': 'application/json'
         },
         body: JSON.stringify({ product_id: productId, quantity: 1 })
     })
-    .then(response => response.json())
+    .then(r => r.json())
     .then(data => {
         if (data.success) {
-            // 🔥 Обновляем счетчик корзины в навбаре
-            if (data.cart_count !== undefined) {
-                updateCartBadge(data.cart_count);
-            }
+            updateCartBadge(data.cart_count);
             showToast(data.message || 'Товар добавлен в корзину!');
         } else {
             showToast(data.message || 'Ошибка', 'error');
-            if (data.redirect) window.location.href = data.redirect;
         }
     })
     .catch(error => {
         console.error('Ошибка:', error);
-        showToast('Ошибка соединения с сервером', 'error');
+        showToast('Ошибка соединения', 'error');
     })
     .finally(() => {
         button.disabled = false;

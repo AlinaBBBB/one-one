@@ -41,6 +41,7 @@ Route::get('/products/search', [ProductController::class, 'search'])->name('prod
 Route::get('/products/category/{slug}', [ProductController::class, 'byCategory'])->name('products.category');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/products/popular', [ProductController::class, 'popular'])->name('products.popular');
+Route::get('/product/{id}/sizes', [ProductController::class, 'getSizes'])->name('product.sizes');
 
 // ----------------------------------- корзина -----------------------------------
 Route::prefix('cart')->group(function () {
@@ -51,6 +52,7 @@ Route::prefix('cart')->group(function () {
     Route::delete('/clear', [CartController::class, 'clear'])->name('cart.clear');
     Route::get('/count', [CartController::class, 'getCartCount'])->name('cart.count');
     Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+    
 });
 
 // ============================================
