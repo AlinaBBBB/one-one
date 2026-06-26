@@ -540,12 +540,7 @@
         const subscribeForm = document.getElementById('subscribeForm');
         const emailInput = subscribeForm?.querySelector('input[type="email"]');
         let isSubmitting = false;
-        
-        function isValidEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
-        
+
         if (subscribeForm) {
             subscribeForm.addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -569,36 +564,74 @@
                 isSubmitting = true;
                 const originalText = submitBtn.textContent;
                 submitBtn.disabled = true;
-                
                 submitBtn.textContent = 'Подписываем...';
-                submitBtn.classList.remove('btn-success');
                 
+                // 🔥 ОТПРАВКА НА СЕРВЕР
+                fetch('{{ route("subscribe") }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ email: emailValue })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        submitBtn.textContent = '✓ Подписано!';
+                        submitBtn.classList.add('btn-success');
+                        emailInput.value = '';
+                        showToast(data.message);
+                    } else {
+                        showError(emailInput, data.message || 'Ошибка');
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                        isSubmitting = false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка:', error);
+                    showError(emailInput, 'Ошибка соединения');
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    isSubmitting = false;
+                });
+                
+                // Восстановление через 3 секунды
                 setTimeout(() => {
-                    submitBtn.textContent = 'Подписано!';
-                    submitBtn.classList.add('btn-success');
-                    emailInput.value = '';
-                    
-                    setTimeout(() => {
+                    if (isSubmitting) {
                         submitBtn.textContent = originalText;
                         submitBtn.classList.remove('btn-success');
                         submitBtn.disabled = false;
                         isSubmitting = false;
-                    }, 3000);
-                }, 1000);
+                    }
+                }, 3000);
             });
-            
-            function showError(input, message) {
-                input.classList.add('is-invalid');
-                const errorElement = input.parentElement.querySelector('.invalid-feedback');
-                if (errorElement) {
-                    errorElement.textContent = message;
-                }
-                input.focus();
+        }
+
+        function showError(input, message) {
+            input.classList.add('is-invalid');
+            const errorElement = input.parentElement.querySelector('.invalid-feedback');
+            if (errorElement) {
+                errorElement.textContent = message;
+            } else {
+                const error = document.createElement('div');
+                error.className = 'invalid-feedback';
+                error.textContent = message;
+                input.parentElement.appendChild(error);
             }
-            
-            function clearError(input) {
-                input.classList.remove('is-invalid');
-            }
+            input.focus();
+        }
+
+        function clearError(input) {
+            input.classList.remove('is-invalid');
+            const errorElement = input.parentElement.querySelector('.invalid-feedback');
+            if (errorElement) errorElement.remove();
+        }
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
         }
         
         // ФИКС для выпадающего меню профиля (добавлено)

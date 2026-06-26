@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController; 
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubscriberController;
 
 // ----------------------------------- домашняя страница -----------------------------------
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -195,3 +196,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // Категории
     Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
 });
+
+
+Route::post('/subscribe', [SubscriberController::class, 'store'])->name('subscribe');
